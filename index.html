@@ -4,16 +4,19 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Cottagecore Game of 15</title>
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath fill='%235f7f57' d='M53 11C28 12 11 28 11 50c0 2 2 3 4 2 13-7 24-18 31-32-2 13-9 24-20 34 8 1 18-3 25-10 11-11 13-28 2-33z'/%3E%3C/svg%3E" />
+
   <style>
     :root {
-      --cream: #fff8ea;
-      --sage: #9caf88;
-      --moss: #596b45;
-      --rose: #d99aa5;
-      --clay: #b8795f;
-      --butter: #f6d98b;
-      --brown: #6b4d3c;
-      --shadow: rgba(80, 55, 35, 0.18);
+      --cream: #fff9f0;
+      --sage: #a8b89a;
+      --forest: #4e6546;
+      --moss: #6f845d;
+      --rose: #d7a0ab;
+      --gold: #f1d791;
+      --soil: #6b4e3d;
+      --shadow: rgba(70, 52, 38, 0.16);
     }
 
     * {
@@ -24,170 +27,172 @@
       margin: 0;
       min-height: 100vh;
       font-family: Georgia, "Times New Roman", serif;
-      color: var(--brown);
+      color: var(--soil);
       background:
-        radial-gradient(circle at 15% 20%, rgba(217,154,165,0.25), transparent 28%),
-        radial-gradient(circle at 85% 10%, rgba(246,217,139,0.28), transparent 24%),
-        linear-gradient(135deg, #f8edcf 0%, #eef3dd 55%, #fde8df 100%);
+        radial-gradient(circle at top left, rgba(241,215,145,0.28), transparent 25%),
+        radial-gradient(circle at bottom right, rgba(215,160,171,0.25), transparent 30%),
+        linear-gradient(135deg, #f7edd9 0%, #eef4e5 45%, #fbe8e2 100%);
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 24px;
+      padding: 28px;
     }
 
-    .page {
-      width: min(960px, 100%);
+    .wrapper {
+      width: min(1100px, 100%);
       display: grid;
-      grid-template-columns: 1fr 420px;
-      gap: 28px;
+      grid-template-columns: 1fr 430px;
+      gap: 32px;
       align-items: center;
     }
 
-    .hero, .game-card {
-      background: rgba(255, 248, 234, 0.82);
-      border: 2px solid rgba(107,77,60,0.12);
-      border-radius: 32px;
-      box-shadow: 0 18px 40px var(--shadow);
-      backdrop-filter: blur(8px);
+    .panel,
+    .game-shell {
+      background: rgba(255,255,255,0.55);
+      border: 1px solid rgba(107,78,61,0.12);
+      border-radius: 34px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 22px 50px var(--shadow);
     }
 
-    .hero {
-      padding: 42px;
+    .panel {
+      padding: 48px;
       position: relative;
       overflow: hidden;
     }
 
-    .hero::before,
-    .hero::after {
-      content: "";
+    .panel::before {
+      content: "🌿";
       position: absolute;
-      width: 170px;
-      height: 170px;
-      border-radius: 50%;
-      background: repeating-radial-gradient(circle, rgba(156,175,136,0.18), rgba(156,175,136,0.18) 8px, transparent 9px, transparent 18px);
-      opacity: 0.75;
-    }
-
-    .hero::before {
-      right: -62px;
-      top: -62px;
-    }
-
-    .hero::after {
-      left: -78px;
-      bottom: -78px;
-      background: repeating-radial-gradient(circle, rgba(217,154,165,0.18), rgba(217,154,165,0.18) 8px, transparent 9px, transparent 18px);
+      top: 16px;
+      right: 22px;
+      font-size: 4rem;
+      opacity: 0.12;
+      transform: rotate(-12deg);
     }
 
     h1 {
       margin: 0;
-      font-size: clamp(2.4rem, 6vw, 4.4rem);
-      line-height: 0.95;
-      color: var(--moss);
-      letter-spacing: -1px;
-      position: relative;
+      font-size: clamp(3rem, 7vw, 5.2rem);
+      line-height: 0.92;
+      color: var(--forest);
+      letter-spacing: -2px;
     }
 
-    .subtitle {
-      margin: 22px 0 0;
-      font-size: 1.18rem;
-      line-height: 1.6;
-      max-width: 520px;
-      position: relative;
+    .intro {
+      margin-top: 24px;
+      font-size: 1.15rem;
+      line-height: 1.8;
+      max-width: 540px;
     }
 
-    .tiny-florals {
+    .decorations {
       margin-top: 28px;
       display: flex;
-      gap: 10px;
+      gap: 14px;
+      font-size: 1.9rem;
       flex-wrap: wrap;
-      font-size: 1.8rem;
-      position: relative;
     }
 
-    .game-card {
-      padding: 22px;
+    .quote {
+      margin-top: 28px;
+      font-style: italic;
+      color: var(--forest);
+      background: rgba(255,255,255,0.45);
+      border-radius: 20px;
+      padding: 16px 18px;
+      max-width: 440px;
+      line-height: 1.7;
+    }
+
+    .game-shell {
+      padding: 24px;
       text-align: center;
     }
 
     .stats {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-bottom: 16px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 18px;
     }
 
-    .stat {
+    .card {
       background: rgba(255,255,255,0.48);
       border-radius: 18px;
-      padding: 12px;
-      border: 1px solid rgba(107,77,60,0.12);
-      font-size: 0.9rem;
+      padding: 14px;
+      border: 1px solid rgba(107,78,61,0.1);
+      font-size: 0.92rem;
     }
 
-    .stat strong {
+    .card strong {
       display: block;
-      color: var(--moss);
-      font-size: 1.3rem;
       margin-top: 4px;
+      color: var(--forest);
+      font-size: 1.4rem;
     }
 
     .board {
       width: 100%;
       aspect-ratio: 1 / 1;
-      background: linear-gradient(145deg, #8ea172, #647851);
-      border-radius: 26px;
-      padding: 12px;
+      background: linear-gradient(145deg, #6e865c, #526645);
+      border-radius: 28px;
+      padding: 14px;
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      grid-template-rows: repeat(4, 1fr);
-      gap: 10px;
-      box-shadow: inset 0 0 18px rgba(46, 58, 33, 0.35);
+      gap: 12px;
+      box-shadow: inset 0 0 20px rgba(0,0,0,0.18);
     }
 
     .tile {
       border: none;
-      border-radius: 20px;
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(1.5rem, 5vw, 2.4rem);
-      color: var(--brown);
+      border-radius: 22px;
       cursor: pointer;
-      background:
-        linear-gradient(145deg, rgba(255,255,255,0.35), rgba(255,255,255,0)),
-        #f8d7dc;
-      box-shadow: 0 8px 0 rgba(107,77,60,0.18), 0 10px 18px rgba(0,0,0,0.12);
-      transition: transform 0.14s ease, box-shadow 0.14s ease, filter 0.14s ease;
+      font-family: Georgia, serif;
+      font-size: clamp(1.6rem, 5vw, 2.5rem);
+      color: var(--soil);
       position: relative;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      box-shadow: 0 10px 18px rgba(0,0,0,0.12);
       overflow: hidden;
     }
 
     .tile::before {
-      content: "✿";
+      content: "❀";
       position: absolute;
-      top: 6px;
-      left: 9px;
-      font-size: 0.72rem;
-      color: rgba(107,77,60,0.34);
+      top: 8px;
+      left: 10px;
+      font-size: 0.75rem;
+      opacity: 0.35;
     }
 
-    .tile:nth-child(4n + 1) { background-color: #f5cfd7; }
-    .tile:nth-child(4n + 2) { background-color: #f8e2a4; }
-    .tile:nth-child(4n + 3) { background-color: #d9e6c3; }
-    .tile:nth-child(4n + 4) { background-color: #f4c8ad; }
+    .tile:nth-child(4n+1) {
+      background: #f6d7dd;
+    }
+
+    .tile:nth-child(4n+2) {
+      background: #f5e1a8;
+    }
+
+    .tile:nth-child(4n+3) {
+      background: #dce8c7;
+    }
+
+    .tile:nth-child(4n+4) {
+      background: #f0cdb8;
+    }
 
     .tile:hover {
-      transform: translateY(-2px);
-      filter: brightness(1.03);
+      transform: translateY(-3px);
     }
 
     .tile:active {
-      transform: translateY(4px);
-      box-shadow: 0 3px 0 rgba(107,77,60,0.2), 0 5px 10px rgba(0,0,0,0.1);
+      transform: translateY(2px);
     }
 
     .empty {
-      background: rgba(255,248,234,0.2);
-      box-shadow: inset 0 0 14px rgba(46, 58, 33, 0.25);
+      background: rgba(255,255,255,0.18);
+      box-shadow: inset 0 0 12px rgba(0,0,0,0.14);
       cursor: default;
     }
 
@@ -195,234 +200,292 @@
       content: "";
     }
 
-    .controls {
+    .buttons {
+      margin-top: 18px;
       display: flex;
-      gap: 10px;
+      gap: 12px;
       justify-content: center;
-      margin: 18px 0 10px;
       flex-wrap: wrap;
     }
 
-    button.control {
+    .buttons button {
       border: none;
-      background: var(--moss);
-      color: var(--cream);
-      padding: 12px 18px;
       border-radius: 999px;
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: 1rem;
+      padding: 13px 20px;
       cursor: pointer;
-      box-shadow: 0 8px 18px rgba(89,107,69,0.24);
-      transition: transform 0.14s ease, opacity 0.14s ease;
+      font-family: Georgia, serif;
+      font-size: 1rem;
+      transition: transform 0.15s ease;
     }
 
-    button.control.secondary {
-      background: var(--clay);
+    #shuffleBtn {
+      background: var(--forest);
+      color: white;
     }
 
-    button.control:hover {
+    #resetBtn {
+      background: var(--rose);
+      color: white;
+    }
+
+    .buttons button:hover {
       transform: translateY(-2px);
     }
 
     .message {
-      min-height: 30px;
-      font-size: 1rem;
-      color: var(--moss);
+      min-height: 34px;
+      margin-top: 18px;
+      color: var(--forest);
       font-style: italic;
-    }
-
-    .instructions {
-      margin: 12px auto 0;
-      font-size: 0.95rem;
       line-height: 1.5;
-      max-width: 340px;
     }
 
-    @media (max-width: 840px) {
-      .page {
+    .tip {
+      font-size: 0.94rem;
+      line-height: 1.6;
+      margin-top: 6px;
+    }
+
+    @media (max-width: 860px) {
+      .wrapper {
         grid-template-columns: 1fr;
       }
 
-      .hero {
-        padding: 30px;
+      .panel {
+        padding: 34px;
       }
 
-      .game-card {
-        max-width: 430px;
-        margin: 0 auto;
+      .game-shell {
         width: 100%;
+        max-width: 440px;
+        margin: 0 auto;
       }
     }
   </style>
 </head>
 <body>
-  <main class="page">
-    <section class="hero" aria-label="Game introduction">
-      <h1>Cottagecore<br />Game of 15</h1>
-      <p class="subtitle">
-        Slide the numbered garden tiles into order from 1 to 15. Use clicks, taps, or your arrow keys to move through this cozy little puzzle patch.
+  <main class="wrapper">
+    <section class="panel">
+      <h1>Cottagecore<br>Game of 15</h1>
+
+      <p class="intro">
+        Wander through a cozy little garden puzzle inspired by wildflowers, soft linen aprons, teacups, mossy cottages, and quiet afternoons. Rearrange the numbered tiles from 1 to 15 and bring order back to the cottage shelf.
       </p>
-      <div class="tiny-florals" aria-hidden="true">
-        <span>🌿</span><span>🍄</span><span>🌸</span><span>🫖</span><span>🌼</span><span>🧺</span>
+
+      <div class="decorations">
+        <span>🌿</span>
+        <span>🍄</span>
+        <span>🌸</span>
+        <span>🫖</span>
+        <span>🌼</span>
+        <span>🧺</span>
+        <span>🌱</span>
+      </div>
+
+      <div class="quote">
+        “Every little puzzle is like tending a tiny garden — patient, peaceful, and quietly rewarding.”
       </div>
     </section>
 
-    <section class="game-card" aria-label="Game of 15 puzzle">
+    <section class="game-shell">
       <div class="stats">
-        <div class="stat">Moves<strong id="moves">0</strong></div>
-        <div class="stat">Time<strong id="timer">0:00</strong></div>
+        <div class="card">
+          Moves
+          <strong id="moves">0</strong>
+        </div>
+
+        <div class="card">
+          Time
+          <strong id="timer">0:00</strong>
+        </div>
       </div>
 
-      <div class="board" id="board" aria-label="Sliding puzzle board"></div>
+      <div class="board" id="board"></div>
 
-      <div class="controls">
-        <button class="control" id="shuffleBtn">Shuffle Garden</button>
-        <button class="control secondary" id="solveBtn">Reset</button>
+      <div class="buttons">
+        <button id="shuffleBtn">Shuffle Garden</button>
+        <button id="resetBtn">Reset Puzzle</button>
       </div>
 
-      <div class="message" id="message">Arrange the tiles like a tidy cottage shelf.</div>
-      <p class="instructions">Tip: only tiles next to the empty space can move.</p>
+      <div class="message" id="message">
+        Arrange the tiles in order from 1 to 15.
+      </div>
+
+      <div class="tip">
+        You can use your mouse, finger, or keyboard arrow keys.
+      </div>
     </section>
   </main>
 
   <script>
     const board = document.getElementById("board");
-    const movesEl = document.getElementById("moves");
-    const timerEl = document.getElementById("timer");
-    const messageEl = document.getElementById("message");
-    const shuffleBtn = document.getElementById("shuffleBtn");
-    const solveBtn = document.getElementById("solveBtn");
+    const movesText = document.getElementById("moves");
+    const timerText = document.getElementById("timer");
+    const message = document.getElementById("message");
 
-    const size = 4;
-    let tiles = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0];
+    const shuffleBtn = document.getElementById("shuffleBtn");
+    const resetBtn = document.getElementById("resetBtn");
+
+    const SIZE = 4;
+
+    let tiles = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,0];
     let moves = 0;
     let seconds = 0;
-    let timer = null;
-    let started = false;
+    let timerInterval = null;
+    let timerStarted = false;
 
-    function render() {
+    function drawBoard() {
       board.innerHTML = "";
 
-      tiles.forEach((value, index) => {
+      tiles.forEach((number, index) => {
         const tile = document.createElement("button");
-        tile.className = value === 0 ? "tile empty" : "tile";
-        tile.setAttribute("aria-label", value === 0 ? "Empty space" : `Tile ${value}`);
-        tile.disabled = value === 0;
-        tile.textContent = value === 0 ? "" : value;
-        tile.addEventListener("click", () => moveTile(index));
+
+        tile.className = number === 0 ? "tile empty" : "tile";
+
+        tile.textContent = number === 0 ? "" : number;
+
+        if (number !== 0) {
+          tile.addEventListener("click", () => tryMove(index));
+        }
+
         board.appendChild(tile);
       });
 
-      movesEl.textContent = moves;
-      timerEl.textContent = formatTime(seconds);
+      movesText.textContent = moves;
+      timerText.textContent = formatTime(seconds);
     }
 
     function formatTime(totalSeconds) {
-      const minutes = Math.floor(totalSeconds / 60);
-      const remainingSeconds = totalSeconds % 60;
-      return `${minutes}:${String(remainingSeconds).padStart(2, "0")}`;
+      const mins = Math.floor(totalSeconds / 60);
+      const secs = totalSeconds % 60;
+      return `${mins}:${String(secs).padStart(2, "0")}`;
     }
 
     function startTimer() {
-      if (started) return;
-      started = true;
-      timer = setInterval(() => {
-        seconds += 1;
-        timerEl.textContent = formatTime(seconds);
+      if (timerStarted) return;
+
+      timerStarted = true;
+
+      timerInterval = setInterval(() => {
+        seconds++;
+        timerText.textContent = formatTime(seconds);
       }, 1000);
     }
 
     function stopTimer() {
-      clearInterval(timer);
-      timer = null;
-      started = false;
+      clearInterval(timerInterval);
+      timerStarted = false;
+    }
+
+    function getEmptyIndex() {
+      return tiles.indexOf(0);
     }
 
     function canMove(index) {
-      const emptyIndex = tiles.indexOf(0);
-      const tileRow = Math.floor(index / size);
-      const tileCol = index % size;
-      const emptyRow = Math.floor(emptyIndex / size);
-      const emptyCol = emptyIndex % size;
-      return Math.abs(tileRow - emptyRow) + Math.abs(tileCol - emptyCol) === 1;
+      const empty = getEmptyIndex();
+
+      const row1 = Math.floor(index / SIZE);
+      const col1 = index % SIZE;
+
+      const row2 = Math.floor(empty / SIZE);
+      const col2 = empty % SIZE;
+
+      return Math.abs(row1 - row2) + Math.abs(col1 - col2) === 1;
     }
 
-    function moveTile(index) {
+    function tryMove(index) {
       if (!canMove(index)) return;
 
       startTimer();
-      const emptyIndex = tiles.indexOf(0);
-      [tiles[index], tiles[emptyIndex]] = [tiles[emptyIndex], tiles[index]];
-      moves += 1;
-      render();
 
-      if (isSolved()) {
+      const empty = getEmptyIndex();
+
+      [tiles[index], tiles[empty]] = [tiles[empty], tiles[index]];
+
+      moves++;
+
+      drawBoard();
+
+      if (checkSolved()) {
         stopTimer();
-        messageEl.textContent = `You solved the garden in ${moves} moves and ${formatTime(seconds)}!`;
+
+        message.textContent = `You restored the cottage garden in ${moves} moves and ${formatTime(seconds)}.`;
       } else {
-        messageEl.textContent = "Keep sliding through the flower patch.";
+        message.textContent = "The little garden puzzle is coming together.";
       }
     }
 
-    function isSolved() {
-      return tiles.every((value, index) => value === (index + 1) % 16);
+    function checkSolved() {
+      return tiles.every((tile, index) => tile === ((index + 1) % 16));
     }
 
     function resetGame() {
       stopTimer();
-      tiles = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0];
+
+      tiles = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,0];
+
       moves = 0;
       seconds = 0;
-      messageEl.textContent = "Arrange the tiles like a tidy cottage shelf.";
-      render();
+
+      message.textContent = "Arrange the tiles in order from 1 to 15.";
+
+      drawBoard();
     }
 
-    function shuffleGame() {
-      resetGame();
-      let lastEmpty = tiles.indexOf(0);
-
-      for (let i = 0; i < 250; i++) {
-        const emptyIndex = tiles.indexOf(0);
-        const neighbors = getMovableNeighbors(emptyIndex).filter(index => index !== lastEmpty);
-        const choice = neighbors[Math.floor(Math.random() * neighbors.length)];
-        lastEmpty = emptyIndex;
-        [tiles[choice], tiles[emptyIndex]] = [tiles[emptyIndex], tiles[choice]];
-      }
-
-      messageEl.textContent = "The garden has been shuffled. Good luck!";
-      render();
-    }
-
-    function getMovableNeighbors(emptyIndex) {
-      const row = Math.floor(emptyIndex / size);
-      const col = emptyIndex % size;
+    function getNeighbors(emptyIndex) {
       const neighbors = [];
 
-      if (row > 0) neighbors.push(emptyIndex - size);
-      if (row < size - 1) neighbors.push(emptyIndex + size);
+      const row = Math.floor(emptyIndex / SIZE);
+      const col = emptyIndex % SIZE;
+
+      if (row > 0) neighbors.push(emptyIndex - SIZE);
+      if (row < SIZE - 1) neighbors.push(emptyIndex + SIZE);
       if (col > 0) neighbors.push(emptyIndex - 1);
-      if (col < size - 1) neighbors.push(emptyIndex + 1);
+      if (col < SIZE - 1) neighbors.push(emptyIndex + 1);
 
       return neighbors;
     }
 
+    function shuffleGame() {
+      resetGame();
+
+      let previousEmpty = getEmptyIndex();
+
+      for (let i = 0; i < 300; i++) {
+        const empty = getEmptyIndex();
+
+        const choices = getNeighbors(empty).filter(index => index !== previousEmpty);
+
+        const chosen = choices[Math.floor(Math.random() * choices.length)];
+
+        previousEmpty = empty;
+
+        [tiles[chosen], tiles[empty]] = [tiles[empty], tiles[chosen]];
+      }
+
+      message.textContent = "The cottage garden has been shuffled.";
+
+      drawBoard();
+    }
+
     document.addEventListener("keydown", event => {
-      const emptyIndex = tiles.indexOf(0);
-      let targetIndex = null;
+      const empty = getEmptyIndex();
 
-      if (event.key === "ArrowUp") targetIndex = emptyIndex + size;
-      if (event.key === "ArrowDown") targetIndex = emptyIndex - size;
-      if (event.key === "ArrowLeft") targetIndex = emptyIndex + 1;
-      if (event.key === "ArrowRight") targetIndex = emptyIndex - 1;
+      let target = null;
 
-      if (targetIndex !== null && targetIndex >= 0 && targetIndex < tiles.length) {
+      if (event.key === "ArrowUp") target = empty + SIZE;
+      if (event.key === "ArrowDown") target = empty - SIZE;
+      if (event.key === "ArrowLeft") target = empty + 1;
+      if (event.key === "ArrowRight") target = empty - 1;
+
+      if (target !== null && target >= 0 && target < tiles.length) {
         event.preventDefault();
-        moveTile(targetIndex);
+        tryMove(target);
       }
     });
 
     shuffleBtn.addEventListener("click", shuffleGame);
-    solveBtn.addEventListener("click", resetGame);
+    resetBtn.addEventListener("click", resetGame);
 
     shuffleGame();
   </script>
